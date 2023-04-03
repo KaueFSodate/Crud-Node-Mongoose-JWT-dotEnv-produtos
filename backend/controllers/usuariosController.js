@@ -19,32 +19,32 @@ module.exports = class usuarioController {
         // Validações 
 
         if(!nome){
-            res.json({message:"Insira um nome"})
+            res.status(422).status(422).json({message:"Insira um nome"})
             return
         }
 
         if(!email){
-            res.json({message:"Insira um email"})
+            res.status(422).json({message:"Insira um email"})
             return
         }
 
         if(!telefone){
-            res.json({message:"Insira um telefone"})
+            res.status(422).json({message:"Insira um telefone"})
             return
         }
 
         if(!senha){
-            res.json({message:"Insira uma senha"})
+            res.status(422).json({message:"Insira uma senha"})
             return
         }
 
         if(!confirmSenha){
-            res.json({message:"Confirme a senha"})
+            res.status(422).json({message:"Confirme a senha"})
             return
         }
 
         if(senha !== confirmSenha){
-            res.json({message:"As senhas precisam ser iguais!"})
+            res.status(422).json({message:"As senhas precisam ser iguais!"})
             return
         }
 
@@ -52,7 +52,7 @@ module.exports = class usuarioController {
         const checarUsuario = await usuario.findOne({email: email})
 
         if(checarUsuario){
-            res.json({message:"Usuario já existe"})
+            res.status(422).json({message:"Usuario já existe"})
             return
         }
 
@@ -76,6 +76,7 @@ module.exports = class usuarioController {
 
         } catch (error) {
             res.json({message: error})
+            
         }
 
     }
@@ -84,12 +85,12 @@ module.exports = class usuarioController {
         const {email, senha} = req.body
 
         if(!email){
-            res.json({message:"Insira um email"})
+            res.status(422).json({message:"Insira um email"})
             return
         }
 
         if(!senha){
-            res.json({message:"Insira uma senha"})
+            res.status(422).json({message:"Insira uma senha"})
             return
         }
 
@@ -97,7 +98,7 @@ module.exports = class usuarioController {
         const Usuario = await usuario.findOne({email: email})
 
         if(!Usuario){
-            res.json({message:"Usuario não existe"})
+            res.status(422).json({message:"Usuario não existe"})
             return
         }
 
@@ -106,7 +107,7 @@ module.exports = class usuarioController {
         const existeSenha = await bcrypt.compare(senha, Usuario.senha)
 
         if(!existeSenha){
-            res.json({message:"Senha invalida!"})
+            res.status(422).json({message:"Senha invalida!"})
             return
         }
 

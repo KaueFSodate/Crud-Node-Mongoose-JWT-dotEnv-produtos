@@ -3,6 +3,7 @@ require('dotenv').config()
 
 // Dependencias
 const express = require('express')
+const cors = require('cors')
 const usuarios = require('./routes/usuariosRoutes')
 const produtos = require('./routes/produtosRoutes')
 const port = process.env.PORT
@@ -13,6 +14,7 @@ const conn = require('./BD/conn')
 
 // Usar json
 app.use(express.json())
+app.use(cors())
 
 
 // Pegar as informações do body
